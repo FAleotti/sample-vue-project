@@ -5,10 +5,12 @@ import UsersView from "./components/UsersView.vue";
 import UserDetailsView from "./components/UserDetailsView.vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
+import UserPosts from "./components/UserPosts.vue";
 
 const routes = [
   { path: "/", component: UsersView },
   { path: "/user/:id", component: UserDetailsView },
+  { path: "/user/:id/posts", name: "posts", component: UserPosts}
 ];
 
 const router = createRouter({
