@@ -2,7 +2,13 @@
 export default {
   data() {
     return {
-      user: {},
+      user: {
+        address: {
+          street: '',
+          suite: '',
+          city: '',
+        }
+      },
     }
   },
   methods: {
@@ -16,6 +22,11 @@ export default {
     goBack() {
       this.$router.back()
     },
+    goPosts() {
+      let userId = this.$route.params.id;
+      let url = `/user/${userId}/posts`;
+      this.$router.push(url);
+    },
   },
   mounted() {
     this.fetchUser()
@@ -24,35 +35,71 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="general-wrapper">
     <div class="user-wrapper">
-      <div>
+      <div class="internal_wrapper">
         <h3>User</h3>
-        <div>
-          <span>Name:</span>
-          <span>{{ user.name }}</span>
+        <div class="section">
+          <span class="fw-bold">Name:</span>
+          <span class="details">{{ user.name }}</span>
         </div>
-        <div>
-          <span>Username:</span>
-          <span>{{ user.username }}</span>
+        <div class="section">
+          <span class="fw-bold">Username:</span>
+          <span class="details">{{ user.username }}</span>
         </div>
-        <div>
-          <span>Email:</span>
-          <span>{{ user.email }}</span>
+        <div class="section">
+          <span class="fw-bold">Email:</span>
+          <span class="details">{{ user.email }}</span>
+        </div>
+        <div class="section">
+          <span class="fw-bold">Address:</span>
+          <span class="details">{{ user.address.street }}, {{user.address.suite}}, {{user.address.city}}</span>
         </div>
       </div>
     </div>
-    <button v-on:click="goBack" class="btn btn-primary">
-      Back
-    </button>
+    <div class="actions">
+      <button v-on:click="goBack" class="btn btn-primary">
+        Back
+      </button>
+      <button v-on:click="goPosts" class="btn btn-primary">
+        Posts
+      </button>
+    </div>
   </div>
 </template>
 
 <style scoped>
+
+.general-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .user-wrapper {
   height: 400px;
+  display: flex;
+  align-items: center;
 }
 .user-wrapper > div {
   min-width: 400px;
+}
+
+.details {
+  text-align: right;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  width: 65%;
+}
+.btn.btn-primary {
+  width: fit-content;
+}
+
+.section {
+  display: flex;
+  justify-content: space-between;
 }
 </style>

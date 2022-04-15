@@ -2,7 +2,7 @@
 export default {
   data() {
     return {
-      users: null,
+      users: [],
       showRemoved: false,
     }
   },
